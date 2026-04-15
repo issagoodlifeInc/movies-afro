@@ -28,7 +28,7 @@ mongoose.connection.on('error', (err) => {
   console.error('MongoDB connection error:', err);
 });
 
-app.use('/api/movies', moviesRouter);
+app.use(['/movies', '/api/movies'], moviesRouter);
 
 app.get('/', (req, res) => {
   res.send({ status: 'Movie API is running' });

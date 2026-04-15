@@ -44,9 +44,43 @@ npm start
 - Add environment variable: `MONGODB_URI`
 - Make sure Render has access to the same MongoDB Atlas cluster via network/firewall settings
 
-## Keep secrets out of Git
+## Video Upload Setup (UpCloud Object Storage)
 
-This repo already ignores `.env` files via `.gitignore`, so your local `backend/.env` is not committed.
+This app supports video file uploads to UpCloud Object Storage.
+
+### Prerequisites
+1. Create an UpCloud account
+2. Set up Object Storage in your UpCloud dashboard
+3. Create a bucket and note down your credentials
+
+### Backend Configuration
+1. Copy `backend/.env.example` to `backend/.env`
+2. Fill in your UpCloud credentials:
+   ```
+   UPCLOUD_ACCESS_KEY="your_access_key"
+   UPCLOUD_SECRET_KEY="your_secret_key"
+   UPCLOUD_BUCKET_NAME="your_bucket_name"
+   UPCLOUD_ENDPOINT="https://your-bucket-name.s3.upcloudobjects.com"
+   ```
+3. Install dependencies:
+   ```bash
+   cd backend
+   npm install
+   ```
+
+### Frontend Configuration
+The frontend is already configured to proxy API requests to the backend during development.
+
+### Usage
+1. Start the backend: `cd backend && npm start`
+2. Start the frontend: `cd frontend && npm run dev`
+3. Navigate to `/movies` and use the upload form to add videos
+4. Videos are automatically uploaded to UpCloud and streamed from there
+
+### File Limits
+- Maximum file size: 500MB
+- Supported formats: All video formats (mp4, avi, mkv, etc.)
+- Files are stored publicly accessible in UpCloud Object Storage
 
 If you have already accidentally committed a real `.env`, remove it from git history and then add a safe example file like `backend/.env.example`.
 
