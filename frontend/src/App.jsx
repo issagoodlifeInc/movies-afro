@@ -3,8 +3,8 @@ import { Routes, Route, Link } from 'react-router-dom';
 function Home() {
   return (
     <main>
-      <h1>Movie Streaming</h1>
-      <p>Browse featured movies and stream from your library.</p>
+      <h1>Dj Afro Movies in HD</h1>
+      <p>Browse featured movies and stream from the comfort of your home.</p>
       <Link to="/movies">Browse movies</Link>
     </main>
   );
