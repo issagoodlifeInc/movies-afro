@@ -1,0 +1,15 @@
+{
+  "name": "movie-streaming-backend",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.4",
+    "mongoose": "^7.5.0"
+  }
+}
