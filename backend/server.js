@@ -11,22 +11,13 @@ app.use(cors());
 app.use(express.json());
 
 const mongoUri = process.env.MONGODB_URI;
-if (!mongoUri) {
-  throw new Error('MONGODB_URI environment variable is required');
+if (mongoUri) {
+  mongoose.connect(mongoUri)
+    .then(() => console.log('Connected to MongoDB'))
+    .catch((error) => console.error('MongoDB connection error:', error));
+} else {
+  console.warn('MONGODB_URI is not set; the verified catalog API will be unavailable.');
 }
-
-mongoose.connect(mongoUri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-mongoose.connection.on('connected', () => {
-  console.log('Connected to MongoDB');
-});
-
-mongoose.connection.on('error', (err) => {
-  console.error('MongoDB connection error:', err);
-});
 
 app.use(['/movies', '/api/movies'], moviesRouter);
 
